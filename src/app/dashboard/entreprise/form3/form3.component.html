@@ -1,0 +1,35 @@
+
+
+
+<div class="card-header pb-0">
+    <h6>Authors table</h6>
+  </div>
+  <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <form (ngSubmit)="addEntreprise()">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="nom" [(ngModel)]="entreprise.nom" name="nom" required>
+              
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">email</label>
+                <input type="text" class="form-control" id="competences" [(ngModel)]="entreprise.email" name="competences" required>
+                
+              </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">adresse</label>
+              <input type="text" class="form-control" [(ngModel)]="entreprise.adresse" name="remarques">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">telephone</label>
+              <input type="text" class="form-control" [(ngModel)]="entreprise.telephone" name="remarques">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">url</label>
+              <input type="text" class="form-control" [(ngModel)]="entreprise.url" name="remarques">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+  </div>

@@ -1,0 +1,62 @@
+
+<div class="card-header pb-0">
+    <h6 class="fs-4 fw-bolder ">Formation table 
+
+      <a routerLink="/dashboard/Formation/form" routerLinkActive="active" href="#" class="btn btn-primary" tabindex="-1" aria-disabled="true" role="button" data-bs-toggle="button" style="margin-left: 600px;">Add Formateur</a>
+    </h6>
+    
+  </div>
+  <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+      <table class="table align-items-center mb-0">
+        <thead>
+          <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Titre</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Programe</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Objectif</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Heures</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cout</th>
+            <th class="text-secondary opacity-7"></th>
+            <th class="text-secondary opacity-7"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of formations">
+            <td>
+              <div class="d-flex px-2 py-1">
+                
+                <div class="d-flex flex-column justify-content-center">
+                  <h6 class="mb-0 text-sm">{{ student.titre }}</h6>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p class="text-xs font-weight-bold mb-0">{{ student.programmeDetaille }}</p>
+            </td>
+            <td class="align-middle text-center text-sm">
+              <p class="text-xs font-weight-bold mb-0">{{ student.objectifs }}</p>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">{{ student.nombreHeures }}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">{{ student.cout }}</span>
+            </td>
+            <td class="align-middle">
+              <a href="javascript:;" class="font-weight-bold text-xs btn btn-bleu" data-toggle="tooltip" data-original-title="Delete user"
+              (click)="deleteFormation(student.id)">
+                Delete
+              </a>
+            </td>
+            <td class="align-middle">
+              <a href="javascript:;" class="font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user"
+              (click)="editFormation(student.id)">
+                Edit
+              </a>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>

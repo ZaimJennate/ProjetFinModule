@@ -3,13 +3,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  selector: 'app-table2',
+  templateUrl: './table2.component.html',
+  styleUrls: ['./table2.component.css']
 })
-export class TableComponent {
-
-  formateurs: any[] = [];
+export class Table2Component {
+  formations: any[] = [];
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -18,14 +17,14 @@ export class TableComponent {
   }
 
   fetchFormateurs() {
-    this.http.get('http://localhost:8080/showForma')
+    this.http.get('http://localhost:8080/afficherFormations')
       .subscribe((data: any) => {
-        this.formateurs = data;
+        this.formations = data;
       });
   }
-  deleteFormateur(id: number) {
-    if (confirm('Are you sure you want to delete this formateur?')) {
-        this.http.delete(`http://localhost:8080/supprimerForma/${id}`)
+  deleteFormation(id: number) {
+    if (confirm('Are you sure you want to delete this formation?')) {
+        this.http.delete(`http://localhost:8080/supprimerFormations/${id}`)
             .subscribe(() => {
                 console.log('Formateur deleted successfully');
                 // Refresh the window after deletion
@@ -34,9 +33,8 @@ export class TableComponent {
     }
 }
 
-editFormateur(id: number) {
+editFormation(id: number) {
   // Navigate to the edit form with the specified formateur ID
-  this.router.navigate(['/dashboard/Formateur/form', id]);
+  this.router.navigate(['/dashboard/Formation/form', id]);
 }
-
 }

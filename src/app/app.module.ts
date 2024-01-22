@@ -21,7 +21,15 @@ import { Table3Component } from './dashboard/entreprise/table3/table3.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { AboutComponent } from './welcome/about/about.component';
+import { NavComponent } from './welcome/nav/nav.component';
+import { FootComponent } from './welcome/foot/foot.component';
+import { HomeComponent } from './welcome/home/home.component';
+import { CarouselComponent } from './welcome/home/carousel/carousel.component';
+import { ContainComponent } from './welcome/home/contain/contain.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { LoginComponent } from './login/login.component';
+import { LoginRoutingModule } from './login/login-routing.module';
 
 @NgModule({
   declarations: [
@@ -37,8 +45,18 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     Table2Component,
     EntrepriseComponent,
     Form3Component,
-    Table3Component
-  ],
+    Table3Component,
+    AboutComponent,
+    NavComponent,
+    FootComponent,
+    HomeComponent,
+    CarouselComponent,
+    ContainComponent,
+    WelcomeComponent,
+    LoginComponent,
+     
+
+    ],
   imports: [
     BrowserModule,
     FormsModule, 
@@ -46,7 +64,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    LoginRoutingModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

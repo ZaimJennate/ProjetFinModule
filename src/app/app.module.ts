@@ -21,6 +21,7 @@ import { Table3Component } from './dashboard/entreprise/table3/table3.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     Table2Component,
     EntrepriseComponent,
     Form3Component,
-    Table3Component
+    Table3Component,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

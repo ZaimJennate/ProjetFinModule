@@ -22,6 +22,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { NavComponent } from './welcome/nav/nav.component';
+import { FootComponent } from './welcome/foot/foot.component';
+import { HomeComponent } from './welcome/home/home.component';
+import { AboutComponent } from './welcome/about/about.component';
+import { ContainComponent } from './welcome/home/contain/contain.component';
+import { CarouselComponent } from './welcome/home/carousel/carousel.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -39,7 +46,15 @@ import { WelcomeComponent } from './welcome/welcome.component';
     EntrepriseComponent,
     Form3Component,
     Table3Component,
-    WelcomeComponent
+    WelcomeComponent,
+    NavComponent,
+    FootComponent,
+    HomeComponent,
+    AboutComponent,
+    ContainComponent,
+    CarouselComponent,
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,

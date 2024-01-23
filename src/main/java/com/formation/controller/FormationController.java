@@ -1,6 +1,7 @@
 package com.formation.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,30 +43,50 @@ public class FormationController {
         return formationRepository.save(formation);
     }
     
-    @PostMapping("/planifier")
-    public ResponseEntity<Formation> planifierFormation(
-            @RequestParam Long formationId,
-            @RequestParam Long formateurId,
-            @RequestParam Long entrepriseId,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateDebut,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFin) {
+    
+    @GetMapping("/afficherFormations")
+    public ResponseEntity<List<Formation>> afficherFormations() {
+        List<Formation> formations = formationRepository.findAll();
+        if (!formations.isEmpty()) {
+            return new ResponseEntity<>(formations, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+    @GetMapping("/compterFormations")
+    public ResponseEntity<Long> compternombreFormations() {
+        long nombreFormations = formationRepository.count();
+        return new ResponseEntity<>(nombreFormations, HttpStatus.OK);
+    }
+    @DeleteMapping("/supprimerFormations/{id}")
+    public ResponseEntity<Void> supprimerFormations(@PathVariable Long id) {
+        formationRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    @PutMapping("/modifierFormation/{id}")
+    public ResponseEntity<Formation> modifierFormation(@PathVariable Long id, @RequestBody Formation formation) {
+    	Formation existingFormation = formationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Formation not found with id: " + id));
 
-        Optional<Formation> optionalFormation = formationRepository.findById(formationId);
-        Optional<Formateur> optionalFormateur = formateurRepository.findById(formateurId);
-        Optional<Entreprise> optionalEntreprise = entrepriseRepository.findById(entrepriseId);
+        // Update the existing formateur with the new data
+        existingFormation.setTitre(formation.getTitre());
+        existingFormation.setProgrammeDetaille(formation.getProgrammeDetaille());
+        existingFormation.setObjectifs(formation.getObjectifs());
+        existingFormation.setNombreHeures(formation.getNombreHeures());
+        existingFormation.setCout(formation.getCout());
 
-        if (optionalFormation.isPresent() && optionalFormateur.isPresent() && optionalEntreprise.isPresent()) {
-            Formation formation = optionalFormation.get();
-            Formateur formateur = optionalFormateur.get();
-            Entreprise entreprise = optionalEntreprise.get();
-
-            formation.setFormateur(formateur);
-            formation.setEntreprise(entreprise);
-            formation.setDateDebut(dateDebut);
-            formation.setDateFin(dateFin);
-
-            Formation formationPlanifiee = formationRepository.save(formation);
-            return new ResponseEntity<>(formationPlanifiee, HttpStatus.CREATED);
+        Formation updatedFormation = formationRepository.save(existingFormation);
+        return new ResponseEntity<>(updatedFormation, HttpStatus.OK);
+    }
+    
+    @GetMapping("/getFormationById/{id}")
+    public ResponseEntity<Formation> getFormationById(@PathVariable Long id) {
+        Optional<Formation> formationOptional = formationRepository.findById(id);
+        
+        if (formationOptional.isPresent()) {
+            Formation formation = formationOptional.get();
+            return new ResponseEntity<>(formation, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -9,6 +9,8 @@ import { FormateurRoutingModule } from '../dashboard/formateur/formateur-routing
 import { FormationRoutingModule } from '../dashboard/formation/formation-routing.module';
 import { LoginComponent } from '../login/login.component';
 import { LoginRoutingModule } from '../login/login-routing.module';
+import { RegisterComponent } from '../register/register.component';
+import { RegisterRoutingModule } from '../register/register-routing.module';
 const routes: Routes = [
   {path:"welcome",redirectTo:"welcome/home",pathMatch:"full"},
   {path:"welcome/home",component:HomeComponent},
@@ -16,12 +18,13 @@ const routes: Routes = [
   {path:"formation",component:FormationComponent},
   {path:"formateur",component:FormateurComponent},
   {path:"login",component:LoginComponent},
+  {path:"register",component:RegisterComponent},
   
 
 ];
 @NgModule({
 
-  imports: [RouterModule.forRoot(routes),FormateurRoutingModule,FormationRoutingModule,LoginRoutingModule],
+  imports: [RouterModule.forRoot(routes),FormateurRoutingModule,FormationRoutingModule,LoginRoutingModule,RegisterRoutingModule],
   exports: [RouterModule]
 })
 export class WelcomeRoutingModule { }

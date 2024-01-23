@@ -26,11 +26,13 @@ import { NavComponent } from './welcome/nav/nav.component';
 import { FootComponent } from './welcome/foot/foot.component';
 import { HomeComponent } from './welcome/home/home.component';
 import { CarouselComponent } from './welcome/home/carousel/carousel.component';
+import { CardsComponent } from './welcome/home/cards/cards.component'; 
 import { ContainComponent } from './welcome/home/contain/contain.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
 import { LoginRoutingModule } from './login/login-routing.module';
-
+import { RegisterComponent } from './register/register.component';
+import { RegisterRoutingModule } from './register/register-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,8 +56,8 @@ import { LoginRoutingModule } from './login/login-routing.module';
     ContainComponent,
     WelcomeComponent,
     LoginComponent,
-     
-
+    RegisterComponent,
+     CardsComponent
     ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { LoginRoutingModule } from './login/login-routing.module';
     NgbModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    RegisterRoutingModule
     
   ],
   providers: [],

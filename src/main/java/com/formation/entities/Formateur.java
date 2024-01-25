@@ -23,7 +23,7 @@ public class Formateur {
     private String competences; 
     private String remarques;
     
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "formateur")
     private List<PlanifierFormation> planifierformation;
     

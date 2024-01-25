@@ -29,8 +29,9 @@ public class Formation {
     private BigDecimal cout;
     private String objectifs;
     private String programmeDetaille;
+    private String img;
     
-    @JsonManagedReference
+  
     @OneToMany(mappedBy = "formation")
     private List<PlanifierFormation> planifierformation;
 

@@ -1,92 +1,86 @@
 <!-- Section: Design Block -->
 <section class="background-radial-gradient overflow-hidden">
-    <style>
+  <style>
       .background-radial-gradient {
-        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_HNtF13SocaF--xXLBRMSXYYHgr5wW60dohIhxpMISqrtlZvg');
-        background-size: cover;
-        backdrop-filter: blur(50px); /* Adjust the blur value as needed */
-
-  
-    }
-  
-  
-      .bg-glass {
-        background-color: hsla(0, 0%, 100%, 0.9) !important;
-        backdrop-filter: saturate(200%) blur(25px);
+          background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_HNtF13SocaF--xXLBRMSXYYHgr5wW60dohIhxpMISqrtlZvg');
+          background-size: cover;
+          backdrop-filter: blur(50px); /* Adjust the blur value as needed */
       }
-    </style>
-  
-    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-      <div class="row gx-lg-5 align-items-center mb-5">  
-        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-          <div class="card bg-glass">
-            <div class="card-body px-4 py-5 px-md-5">
-              <form>
-                <h1 class="text-center"> SIGN UP</h1>
-                <!-- 2 column grid layout with text inputs for the first and last names -->
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <input type="text" id="form3Example1" class="form-control" />
-                      <label class="form-label" for="form3Example1">First name</label>
-                    </div>
+
+      .bg-glass {
+          background-color: hsla(0, 0%, 100%, 0.9) !important;
+          backdrop-filter: saturate(200%) blur(25px);
+      }
+  </style>
+
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div class="row gx-lg-5 align-items-center mb-5">
+          <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+              <div class="card bg-glass">
+                  <div class="card-body px-4 py-5 px-md-5">
+                      <form (ngSubmit)="register()">
+                          <h1 class="text-center"> SIGN UP</h1>
+                          <!-- 2 column grid layout with text inputs for the first and last names -->
+                          <div class="row">
+                              <div class="col-md-6 mb-4">
+                                  <div class="form-outline">
+                                      <input type="text" id="form3Example1" class="form-control" [(ngModel)]="user.firstname" name="firstname" required>
+                                      <label class="form-label" for="form3Example1">First name</label>
+                                  </div>
+                              </div>
+                              <div class="col-md-6 mb-4">
+                                  <div class="form-outline">
+                                      <input type="text" id="form3Example2" class="form-control" [(ngModel)]="user.lastname" name="lastname" required>
+                                      <label class="form-label" for="form3Example2">Last name</label>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <!-- Email input -->
+                          <div class="form-outline mb-4">
+                              <input type="email" id="form3Example3" class="form-control" [(ngModel)]="user.email" name="email" required>
+                              <label class="form-label" for="form3Example3">Email address</label>
+                          </div>
+
+                          <!-- Password input -->
+                          <div class="form-outline mb-4">
+                              <input type="password" id="form3Example4" class="form-control" [(ngModel)]="user.password" name="password" required>
+                              <label class="form-label" for="form3Example4">Password</label>
+                          </div>
+
+                          <!-- Submit button -->
+                          <button type="submit" class="btn btn-primary btn-block mb-4">
+                              Sign up
+                          </button>
+
+                          <!-- Register buttons -->
+                          <div class="text-center">
+                              <p>or sign up with:</p>
+                              <button type="button" class="btn btn-link btn-floating mx-1">
+                                  <i class="fab fa-facebook-f"></i>
+                              </button>
+
+                              <button type="button" class="btn btn-link btn-floating mx-1">
+                                  <i class="fab fa-google"></i>
+                              </button>
+
+                              <button type="button" class="btn btn-link btn-floating mx-1">
+                                  <i class="fab fa-twitter"></i>
+                              </button>
+
+                              <button type="button" class="btn btn-link btn-floating mx-1">
+                                  <i class="fab fa-github"></i>
+                              </button>
+                          </div>
+                          <div>
+                              <p class="mb-0">Already have an account?
+                                  <a routerLink="/login" href="#" class="text-black-50 fw-bold">Sign In </a>
+                              </p>
+                          </div>
+                      </form>
                   </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <input type="text" id="form3Example2" class="form-control" />
-                      <label class="form-label" for="form3Example2">Last name</label>
-                    </div>
-                  </div>
-                </div>
-  
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3" class="form-control" />
-                  <label class="form-label" for="form3Example3">Email address</label>
-                </div>
-  
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4" class="form-control" />
-                  <label class="form-label" for="form3Example4">Password</label>
-                </div>
-  
-                
-  
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">
-                  Sign up
-                </button>
-  
-                <!-- Register buttons -->
-                <div class="text-center">
-                  <p>or sign up with:</p>
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-facebook-f"></i>
-                  </button>
-  
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-google"></i>
-                  </button>
-  
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-twitter"></i>
-                  </button>
-  
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-github"></i>
-                  </button>
-                </div>
-                <div>
-                    <p class="mb-0">Already have an account? 
-                        <a routerLink="/login" href="#" class="text-black-50 fw-bold">Sign In </a>
-                    </p>
-                  </div>
-              </form>
-            </div>
+              </div>
           </div>
-        </div>
       </div>
-    </div>
-  </section>
-  <!-- Section: Design Block -->
+  </div>
+</section>

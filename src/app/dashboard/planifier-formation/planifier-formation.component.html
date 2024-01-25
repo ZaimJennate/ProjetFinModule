@@ -1,0 +1,66 @@
+<!-- planifier-formation.component.html -->
+<div class="container">
+    <h2>Planifier Formation</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="formation">Formation:</label>
+        <select class="form-control" id="formation" [(ngModel)]="selectedFormation" name="formation" required>
+          <option *ngFor="let formation of formations" [value]="formation.id">{{ formation.titre }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="formateur">Formateur:</label>
+        <select class="form-control" id="formateur" [(ngModel)]="selectedFormateur" name="formateur" required>
+          <option *ngFor="let formateur of formateurs" [value]="formateur.id">{{ formateur.nom }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="entreprise">Entreprise:</label>
+        <select class="form-control" id="entreprise" [(ngModel)]="selectedEntreprise" name="entreprise" required>
+          <option *ngFor="let entreprise of entreprises" [value]="entreprise.id">{{ entreprise.nom }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="dateDebut">Date de début:</label>
+        <input type="date" class="form-control" id="dateDebut" [(ngModel)]="dateDebut" name="dateDebut" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="dateFin">Date de fin:</label>
+        <input type="date" class="form-control" id="dateFin" [(ngModel)]="dateFin" name="dateFin" required>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Planifier</button>
+    </form>
+  </div>
+  
+  <!-- planifier-formation.component.html -->
+<!--<div class="container">
+  <h2>Planned Formations</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Formation</th>
+        <th>Formateur</th>
+        <th>Entreprise</th>
+        <th>Date de début</th>
+        <th>Date de fin</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let planification of planifications">
+           
+            <td>{{ planification.formation_id  }}</td>
+            <td>{{ planification.formateur_id }}</td>
+            <td>{{ planification.entreprise?.nom }}</td>
+            <td>{{ planification.dateDebut }}</td>
+            <td>{{ planification.dateFin }}</td>
+          </tr>
+          
+    </tbody>
+  </table>
+</div>
+-->

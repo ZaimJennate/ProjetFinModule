@@ -55,6 +55,6 @@ export class FormComponent implements OnInit {
   }
 
   private redirectToTable(): void {
-    this.router.navigate(['/dashboard/Formateur/table']);
+    this.router.navigate(['/Dashboard/Formateur']);
   }
 }

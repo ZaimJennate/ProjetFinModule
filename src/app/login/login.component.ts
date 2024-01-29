@@ -20,13 +20,18 @@ export class LoginComponent {
             console.log('Login successful!', response.message);
             // Redirect to a different page after successful login
             // Use the correct route structure when navigating
-            if (this.credentials.username=="admin@gmail.com")
+            if (this.credentials.username=="admin@gmail.com"){
             console.log('pageadmin!', response.message);
-            else
+            this.router.navigate(['/Dashboard']);
+            }
+            else{
             console.log('pageuser!', response.message);
+            localStorage.setItem('currentUser', this.credentials.username);
+            this.router.navigate(['/'])}
 // Update the route as needed
           } else if (response.error) {
             console.log('Login failed');
+
             // Handle failed login (e.g., display an error message)
           }
         },

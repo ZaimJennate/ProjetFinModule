@@ -1,0 +1,52 @@
+
+<div class="card-header pb-0">
+    <h6 class="fs-4 fw-bolder">Entreprise table 
+        <div class="mb-3">
+            <label for="nom" class="form-label">NomCategorie</label>
+            <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="newCategory" required>
+        </div>
+        <button class="btn btn-primary" (click)="addCategorie(newCategory)">Add Categorie</button>
+    </h6>
+    
+    
+  </div>
+  <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+      <table class="table align-items-center mb-0">
+        <thead>
+          <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NomCategorie</th>
+            <th class="text-secondary opacity-7"></th>
+            <th class="text-secondary opacity-7"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of categories">
+            <td>
+              <div class="d-flex px-2 py-1">
+                
+                <div class="d-flex flex-column justify-content-center">
+                  <h6 class="mb-0 text-sm">{{ student.nomCategorie }}</h6>
+                </div>
+              </div>
+            </td>
+            
+            
+            <td class="align-middle">
+              <a href="javascript:;" class="font-weight-bold text-xs btn btn-bleu" data-toggle="tooltip" data-original-title="Delete user"
+                (click)="deleteCategorie(student.id)">
+                Delete
+              </a>
+            </td>
+            <td class="align-middle">
+              <a href="javascript:;" class="font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user"
+                >
+                Edit
+              </a>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>

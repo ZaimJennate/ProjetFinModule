@@ -20,20 +20,20 @@ public class PlanifierFormation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
+   
     @ManyToOne
     @JoinColumn(name = "formation_id")
     private Formation formation;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "formateur_id")
     private Formateur formateur;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "entreprise_id")
     private Entreprise entreprise;
+
 
     private LocalDate dateDebut;
     private LocalDate dateFin;

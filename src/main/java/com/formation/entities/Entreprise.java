@@ -26,7 +26,7 @@ public class Entreprise {
     private String url;
     private String email;
     
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "entreprise")
     private List<PlanifierFormation> planifierformation;
 }

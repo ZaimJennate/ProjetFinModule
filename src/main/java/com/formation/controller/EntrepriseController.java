@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.entities.Entreprise;
-import com.formation.entities.Formateur;
 import com.formation.repository.EntrepriseRepository;
 
 @RestController

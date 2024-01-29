@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +56,20 @@ public class UserController {
 	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
 	    }
 	}
+	
+	@GetMapping("/user/{username}")
+    public ResponseEntity<User> getUserDetails(@PathVariable String username) {
+        try {
+            User user = userService.getUserByEmail(username);
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
+    }
 
 
 }

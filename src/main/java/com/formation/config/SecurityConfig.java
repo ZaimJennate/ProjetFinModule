@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/user-page").hasAuthority("USER")
                
 
-                        .requestMatchers("/login","/registration", "/css/**", "/ajouter","/afficherFormations","/ajouterForma","/modifierFormation/{id}","/getFormationById/{id}","/supprimerFormations/{id}","/showForma","/compterFormateurs","/supprimerForma/{id}","/modifierForma/{id}","/api/sessions-formations","/getFormateurById/{id}","/ajouteEntre","Entre","/compterEntreprise","/getEntrepriseById/{id}","/supprimerEntreprise/{id}","/modifierEntreprise/{id}","/compterFormations").permitAll()
+                        .requestMatchers("/login","/registration", "/css/**","/user/{username}", "/ajouter","/afficherFormations","/ajouterForma","/modifierFormation/{id}","/getFormationById/{id}","/supprimerFormations/{id}","/showForma","/compterFormateurs","/supprimerForma/{id}","/modifierForma/{id}","/api/sessions-formations","/getFormateurById/{id}","/ajouteEntre","Entre","/compterEntreprise","/getEntrepriseById/{id}","/supprimerEntreprise/{id}","/modifierEntreprise/{id}","/compterFormations","/categorie","/supprimercategorie/{id}","/modifierCategorie/{id}","/ajoutercategorie","/affichercategorie","/toutes").permitAll()
                         .anyRequest().authenticated())
                 ;
 

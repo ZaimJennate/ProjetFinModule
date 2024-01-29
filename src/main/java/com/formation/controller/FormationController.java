@@ -1,11 +1,11 @@
 package com.formation.controller;
 
-import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formation.entities.Entreprise;
-import com.formation.entities.Formateur;
+import com.formation.entities.Categorie;
 import com.formation.entities.Formation;
+import com.formation.entities.PlanifierFormation;
+import com.formation.repository.CategorieRepository;
 import com.formation.repository.EntrepriseRepository;
 import com.formation.repository.FormateurRepository;
 import com.formation.repository.FormationRepository;
@@ -33,13 +34,13 @@ public class FormationController {
     private FormationRepository formationRepository;
 
     @Autowired
-    private FormateurRepository formateurRepository;
+    private CategorieRepository categorieRepository;
 
-    @Autowired
-    private EntrepriseRepository entrepriseRepository;
+
 
     @PostMapping("/ajouter")
     public Formation ajouterFormation(@RequestBody Formation formation) {
+    	
         return formationRepository.save(formation);
     }
     
@@ -87,6 +88,56 @@ public class FormationController {
         if (formationOptional.isPresent()) {
             Formation formation = formationOptional.get();
             return new ResponseEntity<>(formation, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @GetMapping("/affichercategorie")
+    public ResponseEntity<List<Categorie>> affichercategorie() {
+        List<Categorie> categorie = categorieRepository.findAll();
+        if (!categorie.isEmpty()) {
+            return new ResponseEntity<>(categorie, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+    @GetMapping("/categorie")
+    public List<Categorie> getAllPlannedCategorie() {
+        return categorieRepository.findAll();
+    }
+    
+    @DeleteMapping("/supprimercategorie/{id}")
+    public ResponseEntity<Void> supprimercategorie(@PathVariable Long id) {
+    	categorieRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    @PutMapping("/modifierCategorie/{id}")
+    public ResponseEntity<Categorie> modifierCategorie(@PathVariable Long id, @RequestBody Categorie categorie) {
+    	Categorie existingCategorie = categorieRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categorie not found with id: " + id));
+
+        // Update the existing formateur with the new data
+    	existingCategorie.setNomCategorie(categorie.getNomCategorie());
+
+
+    	Categorie updatedCategorie = categorieRepository.save(existingCategorie);
+        return new ResponseEntity<>(updatedCategorie, HttpStatus.OK);
+    }
+    
+    @PostMapping("/ajoutercategorie")
+    public Categorie ajouterCategorie(@RequestBody Categorie categorie) {
+        return categorieRepository.save(categorie);
+    }
+    
+    @GetMapping("/getCategorieById/{id}")
+    public ResponseEntity<Categorie> getCategorieById(@PathVariable Long id) {
+        Optional<Categorie> categorieOptional = categorieRepository.findById(id);
+        
+        if (categorieOptional.isPresent()) {
+            Categorie categorie = categorieOptional.get();
+            return new ResponseEntity<>(categorie, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

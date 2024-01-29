@@ -36,7 +36,7 @@ export class TableComponent {
 
 editFormateur(id: number) {
   // Navigate to the edit form with the specified formateur ID
-  this.router.navigate(['/dashboard/Formateur/form', id]);
+  this.router.navigate(['Dashboard/Formateur/Form', id]);
 }
 
 }

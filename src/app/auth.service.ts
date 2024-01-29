@@ -31,4 +31,17 @@ loginUser(credentials: any): Observable<any> {
   return this.http.post('http://localhost:8080/login', credentials, { headers });
 }
 
+
+getUserDetails(): Observable<any> {
+    // Assume you have a logged-in user's username stored in localStorage
+    const username = localStorage.getItem('currentUser');
+    if (username) {
+      // Replace 'your-api-endpoint' with the actual API endpoint to fetch user details
+      return this.http.get(`${this.baseUrl}/user/${username}`);
+    } else {
+      // Handle the case where the username is not available
+      return throwError('Username not available');
+    }
+  }
+
 }

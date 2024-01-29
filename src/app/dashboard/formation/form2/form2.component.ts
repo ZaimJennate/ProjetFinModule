@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormationService } from '../formation.service';
 
 @Component({
   selector: 'app-form2',
@@ -9,51 +10,55 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./form2.component.css']
 })
 export class Form2Component {
-  formation: any = {};
-  formationId!: number;
+  formation: any = {}; // Assuming you have a Formation model
+  selectedCategoryId: number = 0;
+  categories: any[] = [];  // Assuming you have a category service to fetch categories
 
   constructor(
+    private formationService: FormationService,
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
-  ngOnInit(): void {
-    this.formationId = +this.route.snapshot.paramMap.get('id')!;
 
-    if (this.formationId) {
-      this.http.get(`http://localhost:8080/getFormationById/${this.formationId}`)
-        .subscribe((data: any) => this.formation = data);
-    }
-  }
-  addFormation() {
-    if (this.formationId) {
-      this.http.put(`http://localhost:8080/modifierFormation/${this.formationId}`, this.formation)
-        .subscribe(response => {
-          console.log(response);
-          this.showNotification('Formation updated successfully');
-          this.redirectToTable();
-        });
-    } else {
-      this.http.post('http://localhost:8080/ajouter', this.formation)
-        .subscribe(response => {
-          console.log(response);
-          this.showNotification('Formation added successfully');
-          this.redirectToTable();
-        });
-    }
+  ngOnInit() {
+    // Fetch categories when the component initializes
+    this.formationService.getCategories().subscribe(
+      (response) => {
+        this.categories = response;
+      },
+      (error) => {
+        console.error('Error fetching categories:', error);
+      }
+    );
   }
 
-  private showNotification(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
-    });
+  ajouterFormation() {
+    // Set the selected category ID to the formation object
+    this.formation.categorie_id = this.selectedCategoryId;
+  
+    // Log the formation object before making the request
+    console.log('Formation object:', this.formation);
+  
+    // Call the service to add the formation
+    this.formationService.ajouterFormation(this.formation).subscribe(
+      (response) => {
+        console.log('Formation added successfully:', response);
+        // You can handle success or navigate to another page here
+      },
+      (error) => {
+        console.error('Error adding formation:', error);
+        // You can handle errors here
+      }
+    );
   }
+  
+  
 
-  private redirectToTable(): void {
-    this.router.navigate(['/dashboard/Formation/table']);
-  }
+  
+  
+
+  
 }
 

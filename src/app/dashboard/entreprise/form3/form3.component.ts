@@ -54,7 +54,7 @@ export class Form3Component {
   }
 
   private redirectToTable(): void {
-    this.router.navigate(['/dashboard/Entreprise/table']);
+    this.router.navigate(['/Dashboard/Entreprise']);
   }
 }
 

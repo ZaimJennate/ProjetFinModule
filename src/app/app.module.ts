@@ -30,14 +30,15 @@ import { CardsComponent } from './welcome/home/cards/cards.component';
 import { ContainComponent } from './welcome/home/contain/contain.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
-import { LoginRoutingModule } from './login/login-routing.module';
+
 import { RegisterComponent } from './register/register.component';
-import { RegisterRoutingModule } from './register/register-routing.module';
+
 import { PlanifierFormationComponent } from './dashboard/planifier-formation/planifier-formation.component';
 import { CommonModule } from '@angular/common';
 import { PageformationComponent } from './welcome/pageformation/pageformation.component';
 import { PageformationDettaileComponent } from './welcome/pageformation-dettaile/pageformation-dettaile.component';
-import { HeaderUserComponent } from './welcome/header-user/header-user.component';
+import { CategorieComponent } from './dashboard/categorie/categorie.component';
+import { TablecategorieComponent } from './dashboard/categorie/tablecategorie/tablecategorie.component';
 
 
 @NgModule({
@@ -68,7 +69,9 @@ import { HeaderUserComponent } from './welcome/header-user/header-user.component
      PlanifierFormationComponent,
      PageformationComponent,
      PageformationDettaileComponent,
-     HeaderUserComponent,
+     CategorieComponent,
+     TablecategorieComponent,
+     
      
     
     ],
@@ -80,8 +83,7 @@ import { HeaderUserComponent } from './welcome/header-user/header-user.component
     NgbModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    LoginRoutingModule,
-    RegisterRoutingModule,
+
     CommonModule,
     ReactiveFormsModule
     

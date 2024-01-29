@@ -1,21 +1,27 @@
 package com.formation.controller;
 
-import java.time.LocalDate;
+
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formation.entities.Entreprise;
-import com.formation.entities.Formateur;
+import com.formation.entities.Categorie;
 import com.formation.entities.Formation;
+import com.formation.entities.PlanifierFormation;
+import com.formation.repository.CategorieRepository;
 import com.formation.repository.EntrepriseRepository;
 import com.formation.repository.FormateurRepository;
 import com.formation.repository.FormationRepository;
@@ -28,40 +34,110 @@ public class FormationController {
     private FormationRepository formationRepository;
 
     @Autowired
-    private FormateurRepository formateurRepository;
+    private CategorieRepository categorieRepository;
 
-    @Autowired
-    private EntrepriseRepository entrepriseRepository;
+
 
     @PostMapping("/ajouter")
     public Formation ajouterFormation(@RequestBody Formation formation) {
+    	
         return formationRepository.save(formation);
     }
     
-    @PostMapping("/planifier")
-    public ResponseEntity<Formation> planifierFormation(
-            @RequestParam Long formationId,
-            @RequestParam Long formateurId,
-            @RequestParam Long entrepriseId,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateDebut,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFin) {
+    
+    @GetMapping("/afficherFormations")
+    public ResponseEntity<List<Formation>> afficherFormations() {
+        List<Formation> formations = formationRepository.findAll();
+        if (!formations.isEmpty()) {
+            return new ResponseEntity<>(formations, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+    @GetMapping("/compterFormations")
+    public ResponseEntity<Long> compternombreFormations() {
+        long nombreFormations = formationRepository.count();
+        return new ResponseEntity<>(nombreFormations, HttpStatus.OK);
+    }
+    @DeleteMapping("/supprimerFormations/{id}")
+    public ResponseEntity<Void> supprimerFormations(@PathVariable Long id) {
+        formationRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    @PutMapping("/modifierFormation/{id}")
+    public ResponseEntity<Formation> modifierFormation(@PathVariable Long id, @RequestBody Formation formation) {
+    	Formation existingFormation = formationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Formation not found with id: " + id));
 
-        Optional<Formation> optionalFormation = formationRepository.findById(formationId);
-        Optional<Formateur> optionalFormateur = formateurRepository.findById(formateurId);
-        Optional<Entreprise> optionalEntreprise = entrepriseRepository.findById(entrepriseId);
+        // Update the existing formateur with the new data
+        existingFormation.setTitre(formation.getTitre());
+        existingFormation.setProgrammeDetaille(formation.getProgrammeDetaille());
+        existingFormation.setObjectifs(formation.getObjectifs());
+        existingFormation.setNombreHeures(formation.getNombreHeures());
+        existingFormation.setCout(formation.getCout());
 
-        if (optionalFormation.isPresent() && optionalFormateur.isPresent() && optionalEntreprise.isPresent()) {
-            Formation formation = optionalFormation.get();
-            Formateur formateur = optionalFormateur.get();
-            Entreprise entreprise = optionalEntreprise.get();
+        Formation updatedFormation = formationRepository.save(existingFormation);
+        return new ResponseEntity<>(updatedFormation, HttpStatus.OK);
+    }
+    
+    @GetMapping("/getFormationById/{id}")
+    public ResponseEntity<Formation> getFormationById(@PathVariable Long id) {
+        Optional<Formation> formationOptional = formationRepository.findById(id);
+        
+        if (formationOptional.isPresent()) {
+            Formation formation = formationOptional.get();
+            return new ResponseEntity<>(formation, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @GetMapping("/affichercategorie")
+    public ResponseEntity<List<Categorie>> affichercategorie() {
+        List<Categorie> categorie = categorieRepository.findAll();
+        if (!categorie.isEmpty()) {
+            return new ResponseEntity<>(categorie, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+    @GetMapping("/categorie")
+    public List<Categorie> getAllPlannedCategorie() {
+        return categorieRepository.findAll();
+    }
+    
+    @DeleteMapping("/supprimercategorie/{id}")
+    public ResponseEntity<Void> supprimercategorie(@PathVariable Long id) {
+    	categorieRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    @PutMapping("/modifierCategorie/{id}")
+    public ResponseEntity<Categorie> modifierCategorie(@PathVariable Long id, @RequestBody Categorie categorie) {
+    	Categorie existingCategorie = categorieRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categorie not found with id: " + id));
 
-            formation.setFormateur(formateur);
-            formation.setEntreprise(entreprise);
-            formation.setDateDebut(dateDebut);
-            formation.setDateFin(dateFin);
+        // Update the existing formateur with the new data
+    	existingCategorie.setNomCategorie(categorie.getNomCategorie());
 
-            Formation formationPlanifiee = formationRepository.save(formation);
-            return new ResponseEntity<>(formationPlanifiee, HttpStatus.CREATED);
+
+    	Categorie updatedCategorie = categorieRepository.save(existingCategorie);
+        return new ResponseEntity<>(updatedCategorie, HttpStatus.OK);
+    }
+    
+    @PostMapping("/ajoutercategorie")
+    public Categorie ajouterCategorie(@RequestBody Categorie categorie) {
+        return categorieRepository.save(categorie);
+    }
+    
+    @GetMapping("/getCategorieById/{id}")
+    public ResponseEntity<Categorie> getCategorieById(@PathVariable Long id) {
+        Optional<Categorie> categorieOptional = categorieRepository.findById(id);
+        
+        if (categorieOptional.isPresent()) {
+            Categorie categorie = categorieOptional.get();
+            return new ResponseEntity<>(categorie, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

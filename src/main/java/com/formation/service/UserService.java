@@ -2,7 +2,10 @@ package com.formation.service;
 
 import com.formation.entities.User;
 
-//UserService.java
+
+
 public interface UserService {
- User getUserByUsername(String username);
+    User getUserByEmail(String email);
+    User save(User userDto);
+    boolean authenticate(String email, String password);
 }

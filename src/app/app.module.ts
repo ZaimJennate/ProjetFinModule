@@ -39,6 +39,7 @@ import { PageformationComponent } from './welcome/pageformation/pageformation.co
 import { PageformationDettaileComponent } from './welcome/pageformation-dettaile/pageformation-dettaile.component';
 import { CategorieComponent } from './dashboard/categorie/categorie.component';
 import { TablecategorieComponent } from './dashboard/categorie/tablecategorie/tablecategorie.component';
+import { JoinforfreeComponent } from './joinforfree/joinforfree.component';
 
 
 @NgModule({
@@ -71,8 +72,8 @@ import { TablecategorieComponent } from './dashboard/categorie/tablecategorie/ta
      PageformationDettaileComponent,
      CategorieComponent,
      TablecategorieComponent,
-     
-     
+     JoinforfreeComponent,
+   
     
     ],
   imports: [

@@ -10,6 +10,7 @@ import { FormationComponent } from './formation/formation.component';
 import { FormationRoutingModule } from './formation/formation-routing.module';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
 import { EntrepriseRoutingModule } from './entreprise/entreprise-routing.module';
+import { PlanifierFormationComponent } from './planifier-formation/planifier-formation.component';
 
 const routes: Routes = [
   {path:"dashboard",redirectTo:"dashboard/main",pathMatch:"full"},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:"dashboard/Formateur",component:FormateurComponent},
   {path:"dashboard/Formation",component:FormationComponent},
   {path:"dashboard/Entreprise",component:EntrepriseComponent},
+  {path:"dashboard/planifierformation",component:PlanifierFormationComponent},
 ];
 
 @NgModule({

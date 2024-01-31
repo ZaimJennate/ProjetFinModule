@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AsideComponent } from './dashboard/aside/aside.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './dashboard/main/main.component';
 import { FormateurComponent } from './dashboard/formateur/formateur.component';
@@ -30,9 +30,18 @@ import { CardsComponent } from './welcome/home/cards/cards.component';
 import { ContainComponent } from './welcome/home/contain/contain.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
-import { LoginRoutingModule } from './login/login-routing.module';
+
 import { RegisterComponent } from './register/register.component';
-import { RegisterRoutingModule } from './register/register-routing.module';
+
+import { PlanifierFormationComponent } from './dashboard/planifier-formation/planifier-formation.component';
+import { CommonModule } from '@angular/common';
+import { PageformationComponent } from './welcome/pageformation/pageformation.component';
+import { PageformationDettaileComponent } from './welcome/pageformation-dettaile/pageformation-dettaile.component';
+import { CategorieComponent } from './dashboard/categorie/categorie.component';
+import { TablecategorieComponent } from './dashboard/categorie/tablecategorie/tablecategorie.component';
+import { JoinforfreeComponent } from './joinforfree/joinforfree.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +66,15 @@ import { RegisterRoutingModule } from './register/register-routing.module';
     WelcomeComponent,
     LoginComponent,
     RegisterComponent,
-     CardsComponent
+     CardsComponent,
+     PlanifierFormationComponent,
+     PageformationComponent,
+     PageformationDettaileComponent,
+     CategorieComponent,
+     TablecategorieComponent,
+     JoinforfreeComponent,
+   
+    
     ],
   imports: [
     BrowserModule,
@@ -67,8 +84,9 @@ import { RegisterRoutingModule } from './register/register-routing.module';
     NgbModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    LoginRoutingModule,
-    RegisterRoutingModule
+
+    CommonModule,
+    ReactiveFormsModule
     
   ],
   providers: [],

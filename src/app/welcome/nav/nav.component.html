@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
     <div class="container-fluid">
-      <a routerLink="home" class="navbar-brand" href="#">App</a>
+      <a routerLink="home" class="navbar-brand" href="#">
+        <img src="../assets/img/education.png" class="navbar-brand-img " style ="width: 30px; height: 30px;"alt="main_logo">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,10 +15,10 @@
             <a  routerLink="about"  class="nav-link" href="#">About Us</a>
           </li>
           <li class="nav-item">
-            <a  routerLink="/pageformation"  class="nav-link" >Formation</a>
+            <a  routerLink="/pageformation"  class="nav-link" >Courses</a>
           </li>
           <li class="nav-item" *ngIf="menuType==='default'">
-            <a  routerLink="formateur"  class="nav-link">Formateurs</a>
+            <a  routerLink="/pageformateur"  class="nav-link">Instructors</a>
           </li>
         </ul>
         <form class="d-flex">
@@ -73,7 +75,8 @@
               <p class="mb-3">Back To 
                   <a routerLink="/register" href="#" class="text-black-50 fw-bold">Sign Up</a>
               </p>
-            </div> </div>
+            </div>
+           </div>
       </div>
   </div>
 </div>

@@ -10,7 +10,6 @@ import { ActivatedRoute } from '@angular/router';
 export class PageformationDettaileComponent {
   formationId: string | null = null;
   formationDetails: any = {};
-
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {

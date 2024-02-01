@@ -52,7 +52,7 @@
       <div class="modal-content">
           <div class="modal-header">
               <h1 class="modal-title" id="joinModalLabel"style="font-size:1.6em">Sign up with your organization</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+              <button type="button" class="btn-close text-black-50"data-bs-dismiss="modal" aria-label="Close">X</button>
           </div>
           <div class="modal-body">
               <!-- Add your modal content here -->
@@ -60,12 +60,12 @@
               <form>
                   <div class="mb-3">
                     
-                      <label for="organization" class="form-label">ENTER YOUR ORGANIZATION URL
+                      <label for="organizationUrl" class="form-label">ENTER YOUR ORGANIZATION URL
                       </label>
-                      <input type="text" class="form-control" id="organization" placeholder="(ex: company.com or company.org)">
+                      <input type="text" class="form-control" id="organizationUrl" placeholder="(ex: company.com or company.org)">
 
                     </div>
-                    <button type="button" class="btn btn-primary ">Continue</button>
+                    <button type="button" class="btn btn-primary" >Continue</button>
 
                   <!-- Add more form fields as needed -->
               </form>
@@ -73,7 +73,7 @@
           <div class="modal-footer">
             <div>
               <p class="mb-3">Back To 
-                  <a routerLink="/register" href="#" class="text-black-50 fw-bold">Sign Up</a>
+                  <a routerLink="/register" href="#" class="text-black-50 fw-bold" data-bs-dismiss="modal" >Sign Up</a>
               </p>
             </div>
            </div>

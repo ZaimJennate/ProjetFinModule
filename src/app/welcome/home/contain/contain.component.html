@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-lg-4 text-center" *ngFor="let student of formateurs.slice(0,3)">
       <!-- Replace the SVG with an IMG element -->
-      <img src="https://cdn-icons-png.flaticon.com/512/4042/4042356.png"  width="140" height="140" class="bd-placeholder-img rounded-circle mx-auto">
+      <img src="{{ student.img }}"  width="140" height="140" class="bd-placeholder-img rounded-circle mx-auto">
 
       <h2  class="text-center">{{ student.nom }}</h2>
       <p>{{ student.competences }}</p>

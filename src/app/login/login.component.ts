@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   credentials: any = {};
+  errorMessage: string = ''; // New variable to store error message
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -18,26 +19,28 @@ export class LoginComponent {
         response => {
           if (response.message) {
             console.log('Login successful!', response.message);
-            // Redirect to a different page after successful login
-            // Use the correct route structure when navigating
-            if (this.credentials.username=="admin@gmail.com"){
-            console.log('pageadmin!', response.message);
-            this.router.navigate(['/Dashboard']);
+            if (this.credentials.username == "admin@gmail.com") {
+              console.log('pageadmin!', response.message);
+              this.router.navigate(['/Dashboard']);
+            } else {
+              console.log('pageuser!', response.message);
+              localStorage.setItem('currentUser', this.credentials.username);
+              this.router.navigate(['/']);
             }
-            else{
-            console.log('pageuser!', response.message);
-            localStorage.setItem('currentUser', this.credentials.username);
-            this.router.navigate(['/'])}
-// Update the route as needed
           } else if (response.error) {
             console.log('Login failed');
 
-            // Handle failed login (e.g., display an error message)
+            // Set the error message to display in the template
+            this.errorMessage = 'Incorrect email or password';
           }
         },
-        
+        error => {
+          console.error('Login failed:', error);
+
+          // Set a generic error message for unexpected errors
+          this.errorMessage = 'An unexpected error occurred';
+        }
       );
-      
-      }
-    }      
+    }
+  }
 }

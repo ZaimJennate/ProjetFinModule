@@ -44,6 +44,7 @@ import { AfficheFormationComponent } from './welcome/affiche-formation/affiche-f
 
 import { PageformateurComponent } from './welcome/pageformateur/pageformateur.component';
 import { PageformateurDetailleComponent } from './welcome/pageformateur-detaille/pageformateur-detaille.component';
+import { PlannedFormationsComponent } from './welcome/planned-formations/planned-formations.component';
 
 
 
@@ -83,6 +84,7 @@ import { PageformateurDetailleComponent } from './welcome/pageformateur-detaille
 
      PageformateurComponent,
      PageformateurDetailleComponent,
+     PlannedFormationsComponent,
     
 
     

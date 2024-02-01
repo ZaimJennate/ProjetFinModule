@@ -24,6 +24,7 @@ import { PageformationDettaileComponent } from './welcome/pageformation-dettaile
 import { TablecategorieComponent } from './dashboard/categorie/tablecategorie/tablecategorie.component';
 import { CategorieComponent } from './dashboard/categorie/categorie.component';
 import { AfficheFormationComponent } from './welcome/affiche-formation/affiche-formation.component';
+import { PlannedFormationsComponent } from './welcome/planned-formations/planned-formations.component';
 export const routes: Routes = [
   { path: '', component: WelcomeComponent, 
   children: [
@@ -41,6 +42,7 @@ export const routes: Routes = [
   
     { path: "register", component: RegisterComponent },
     { path: "afficheforma", component: AfficheFormationComponent },
+    { path: "planforma", component: PlannedFormationsComponent },
   ],
 },
 

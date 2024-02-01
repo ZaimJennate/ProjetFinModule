@@ -21,7 +21,10 @@
             <a  routerLink="/pageformateur"  class="nav-link">Instructors</a>
           </li>
           <li class="nav-item" *ngIf="menuType==='seller'">
-            <a  routerLink="afficheforma"  class="nav-link">mes Formations</a>
+            <a  routerLink="/afficheforma"  class="nav-link">mes Formations</a>
+          </li>
+          <li class="nav-item" *ngIf="menuType==='Formateur'">
+            <a  routerLink="/planforma"  class="nav-link">FormationsPlanifier</a>
           </li>
         </ul>
         <form class="d-flex">
@@ -44,6 +47,13 @@
                 <a routerLink="freejoin" class="nav-link" href="#">{{ userFirstName}}</a>
             </li>
           </ul>
+          <ul *ngSwitchCase="'Formateur'" class="navbar-nav ">
+            <li class="nav-item">
+                <a class="nav-link" (click)="logout()">Logout</a>
+            </li><li class="nav-item">
+                <a routerLink="freejoin" class="nav-link" href="#">{{ userFirstName}}</a>
+            </li>
+            </ul>
         </div>
       </div>
 
@@ -60,18 +70,21 @@
           <div class="modal-body">
               <!-- Add your modal content here -->
               <!-- For example, a form to collect user details -->
-              <form>
+              <div *ngIf="menuType === 'default'">
+                <!-- Default menu content -->
+                <form>
                   <div class="mb-3">
-                    
-                      <label for="organization" class="form-label">ENTER YOUR ORGANIZATION URL
-                      </label>
-                      <input type="text" class="form-control" id="organization" placeholder="(ex: company.com or company.org)">
-
-                    </div>
-                    <button type="button" class="btn btn-primary ">Continue</button>
-
-                  <!-- Add more form fields as needed -->
-              </form>
+                    <label for="organization" class="form-label">ENTER YOUR ORGANIZATION URL</label>
+                    <input type="text" class="form-control" id="organization" placeholder="(ex: company.com or company.org)" [(ngModel)]="organizationUrl">
+                  </div>
+              
+                  <div *ngIf="isEmailExists" class="alert alert-danger" role="alert">
+                    Error: Email already exists
+                  </div>
+              
+                  <button type="button" class="btn btn-primary" (click)="onContinue()">Continue</button>
+                </form>
+              </div>
           </div>
           <div class="modal-footer">
             <div>

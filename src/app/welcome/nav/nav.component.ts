@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { OrganizationService } from 'src/app/organization.service';
 
 
 @Component({
@@ -11,8 +12,8 @@ import { AuthService } from 'src/app/auth.service';
 export class NavComponent implements OnInit {
   menuType: string = 'default';
   userFirstName: string = '';  // Add this variable
-
-  constructor(private route: Router, private authService: AuthService) { }
+  organizationUrl: string = '';
+  constructor(private organizationService: OrganizationService, private route: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.events.subscribe((val: any) => {
@@ -40,5 +41,17 @@ export class NavComponent implements OnInit {
   logout() {
     localStorage.removeItem('currentUser');
     this.route.navigate(['/']);
+  }
+  onContinueClick() {
+    this.organizationService.register(this.organizationUrl).subscribe(
+      (response) => {
+        // Organization URL exists, handle accordingly
+        console.log('Organization URL exists:', response);
+      },
+      (error) => {
+        // Organization URL doesn't exist or error, handle accordingly
+        console.error('Error checking organization URL:', error);
+      }
+    );
   }
 }

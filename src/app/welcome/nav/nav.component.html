@@ -62,10 +62,10 @@
                     
                       <label for="organizationUrl" class="form-label">ENTER YOUR ORGANIZATION URL
                       </label>
-                      <input type="text" class="form-control" id="organizationUrl" placeholder="(ex: company.com or company.org)">
+                      <input [(ngModel)]="organizationUrl" type="text" class="form-control" id="organizationUrl" placeholder="(ex: company.com or company.org)">
 
                     </div>
-                    <button type="button" class="btn btn-primary" >Continue</button>
+                    <button (click)="onContinueClick()" type="button" class="btn btn-primary" >Continue</button>
 
                   <!-- Add more form fields as needed -->
               </form>

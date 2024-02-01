@@ -7,10 +7,17 @@
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
                 <form (ngSubmit)="addFormateur()">
+                  <div class="mb-3">
+                    <label for="formateurId" class="form-label">Choose Formateur</label>
+                    <select id="formateurId" class="form-select" [(ngModel)]="formateur.id" name="id" required>
+                      <option *ngFor="let user of formateurs" [value]="user.id">{{ user.firstname }} {{ user.lastname }}</option>
+                    </select>
+                  </div>
                     <div class="mb-4">
                       <label for="exampleInputEmail1" class="form-label">Nom</label>
-                      <input type="text" class="form-control" id="nom" [(ngModel)]="formateur.nom" name="nom" required>
-                      
+                      <select type="text" class="form-control" id="nom" [(ngModel)]="formateur.nom" name="nom" required>
+                      <option *ngFor="let user of formateurs" [value]="user.firstname">{{ user.firstname }} {{ user.lastname }}</option>
+                      </select>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">competences</label>
@@ -20,6 +27,10 @@
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">remarques</label>
                       <input type="text" class="form-control" [(ngModel)]="formateur.remarques" name="remarques">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">image</label>
+                      <input type="text" class="form-control" [(ngModel)]="formateur.img" name="img">
                     </div>
                    
                     <button type="submit" class="btn btn-primary">Submit</button>

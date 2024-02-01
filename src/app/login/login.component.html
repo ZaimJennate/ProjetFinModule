@@ -39,6 +39,12 @@
               
 
               <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+              <div *ngIf="errorMessage" class="alert alert-danger d-flex align-items-center" role="alert">
+                {{ errorMessage }}
+              </div>
+              
+              <!-- Your existing login form goes here -->
+              
               <div>
                 <p class="mb-0">Don't have an account? 
                     <a routerLink="/register" href="#" class="text-black-50 fw-bold">Sign Up</a>

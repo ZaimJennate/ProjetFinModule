@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
     <div class="container-fluid">
-      <a routerLink="home" class="navbar-brand" href="#">App</a>
+      <a routerLink="home" class="navbar-brand" href="#">
+        <img src="../assets/img/education.png" class="navbar-brand-img " style ="width: 30px; height: 30px;"alt="main_logo">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,10 +15,16 @@
             <a  routerLink="about"  class="nav-link" href="#">About Us</a>
           </li>
           <li class="nav-item">
-            <a  routerLink="pageformation"  class="nav-link" >Formation</a>
+            <a  routerLink="/pageformation"  class="nav-link" >Courses</a>
           </li>
           <li class="nav-item" *ngIf="menuType==='default'">
-            <a  routerLink="formateur"  class="nav-link">Formateurs</a>
+            <a  routerLink="/pageformateur"  class="nav-link">Instructors</a>
+          </li>
+          <li class="nav-item" *ngIf="menuType==='seller'">
+            <a  routerLink="/afficheforma"  class="nav-link">mes Formations</a>
+          </li>
+          <li class="nav-item" *ngIf="menuType==='Formateur'">
+            <a  routerLink="/planforma"  class="nav-link">FormationsPlanifier</a>
           </li>
         </ul>
         <form class="d-flex">
@@ -28,7 +36,7 @@
             <li class="nav-item">
                 <a routerLink="login" class="nav-link" href="#">Sign In</a>
             </li><li class="nav-item">
-                <a routerLink="freejoin" class="nav-link" href="#">Join In For Free</a>
+                <a  class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#joinModal">Join In For Free</a>
             </li>
           </ul>
 
@@ -39,8 +47,52 @@
                 <a routerLink="freejoin" class="nav-link" href="#">{{ userFirstName}}</a>
             </li>
           </ul>
+          <ul *ngSwitchCase="'Formateur'" class="navbar-nav ">
+            <li class="nav-item">
+                <a class="nav-link" (click)="logout()">Logout</a>
+            </li><li class="nav-item">
+                <a routerLink="freejoin" class="nav-link" href="#">{{ userFirstName}}</a>
+            </li>
+            </ul>
         </div>
       </div>
 
     </div>
   </nav>
+  <!-- Modal HTML structure -->
+<div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title" id="joinModalLabel"style="font-size:1.6em">Sign up with your organization</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+          </div>
+          <div class="modal-body">
+              <!-- Add your modal content here -->
+              <!-- For example, a form to collect user details -->
+              <div *ngIf="menuType === 'default'">
+                <!-- Default menu content -->
+                <form>
+                  <div class="mb-3">
+                    <label for="organization" class="form-label">ENTER YOUR ORGANIZATION URL</label>
+                    <input type="text" class="form-control" id="organization" placeholder="(ex: company.com or company.org)" [(ngModel)]="organizationUrl">
+                  </div>
+              
+                  <div *ngIf="isEmailExists" class="alert alert-danger" role="alert">
+                    Error: Email already exists
+                  </div>
+              
+                  <button type="button" class="btn btn-primary" (click)="onContinue()">Continue</button>
+                </form>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <div>
+              <p class="mb-3">Back To 
+                  <a routerLink="/register" href="#" class="text-black-50 fw-bold">Sign Up</a>
+              </p>
+            </div>
+           </div>
+      </div>
+  </div>
+</div>

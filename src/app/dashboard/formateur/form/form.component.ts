@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-form',
@@ -11,16 +12,28 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class FormComponent implements OnInit {
   formateur: any = {};
   formateurId!: number;
+  formateurs: any[] = [];
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.formateurId = +this.route.snapshot.paramMap.get('id')!;
+
+    // Fetch the list of Formateurs
+    this.authService.getFormateurs().subscribe(
+      (formateurs: any[]) => {
+        this.formateurs = formateurs;
+      },
+      (error) => {
+        console.error('Error fetching Formateurs:', error);
+      }
+    );
 
     if (this.formateurId) {
       this.http.get(`http://localhost:8080/getFormateurById/${this.formateurId}`)

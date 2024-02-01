@@ -4,6 +4,7 @@
 <div class="container">
     <div class="card">
         <div class="container-fliud">
+          <form (ngSubmit)="addToCart()">
             <div class="wrapper row">
                 <div class="preview col-md-6">
                     
@@ -30,14 +31,14 @@
                     <p class="product-description">{{ formationDetails.programmeDetaille }}</p>
                     <h4 class="price">current price: <span>${{ formationDetails.cout }}</span></h4>
                     <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-                   
-                    
                     <div class="action">
-                        <a routerLink="/register" href="#" class="btn btn-primary" tabindex="-1" aria-disabled="true" role="button" data-bs-toggle="button" >Inscription Formation</a>
+                      <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </div>
+          </form>
         </div>
+        
     </div>
 </div>
 <br><br><br><br><br><br>

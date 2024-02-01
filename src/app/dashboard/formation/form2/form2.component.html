@@ -1,4 +1,4 @@
-<!--<div class="card-header pb-0">
+<div class="card-header pb-0">
   <h6>Authors table</h6>
 </div>
 <div class="card-body px-0 pt-0 pb-2">
@@ -38,30 +38,48 @@
     </form>
   </div>
 </div>
--->
-<div>
-  <label for="titre">Titre:</label>
-  <input id="titre" [(ngModel)]="formation.titre" />
 
-  <label for="nombreHeures">Nombre d'heures:</label>
-  <input id="nombreHeures" [(ngModel)]="formation.nombreHeures" type="number" />
+<!--<form [formGroup]="formationForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="titre">Titre:</label>
+    <input type="text" id="titre" formControlName="titre" required>
+  </div>
 
-  <label for="cout">Cout:</label>
-  <input id="cout" [(ngModel)]="formation.cout" type="number" />
+  <div>
+    <label for="nombreHeures">Nombre d'heures:</label>
+    <input type="number" id="nombreHeures" formControlName="nombreHeures" required>
+  </div>
 
-  <label for="objectifs">Objectifs:</label>
-  <textarea id="objectifs" [(ngModel)]="formation.objectifs"></textarea>
+  <div>
+    <label for="cout">Coût:</label>
+    <input type="number" id="cout" formControlName="cout" required>
+  </div>
 
-  <label for="programmeDetaille">Programme Détaille:</label>
-  <textarea id="programmeDetaille" [(ngModel)]="formation.programmeDetaille"></textarea>
+  <div>
+    <label for="objectifs">Objectifs:</label>
+    <textarea id="objectifs" formControlName="objectifs" required></textarea>
+  </div>
 
-  <label for="img">Image URL:</label>
-  <input id="img" [(ngModel)]="formation.img" />
+  <div>
+    <label for="programmeDetaille">Programme détaillé:</label>
+    <textarea id="programmeDetaille" formControlName="programmeDetaille" required></textarea>
+  </div>
 
-  <label for="categorie">Choose a Category:</label>
-  <select id="categorie" [(ngModel)]="selectedCategoryId">
-    <option *ngFor="let category of categories" [value]="category.id">{{ category.id }}</option>
+  <div>
+    <label for="img">Image URL:</label>
+    <input type="text" id="img" formControlName="img" required>
+  </div>
+
+ <div>
+  <label for="idCategorie">Categorie:</label>
+  <select id="idCategorie" formControlName="idCategorie" required>
+    <option *ngFor="let categorie of categories" [value]="categorie.id">{{ categorie.nom }}</option>
   </select>
-
-  <button (click)="ajouterFormation()">Ajouter Formation</button>
 </div>
+
+
+
+  <button type="submit">Add Formation</button>
+</form>-->
+
+

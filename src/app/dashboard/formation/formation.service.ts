@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Categorie } from '../categorie/categorie.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormationService {
+  private apiUrl = 'http://localhost:8080';  // Replace with your API endpoint
 
-  private apiUrl = 'http://localhost:8080'; // Replace with your actual API URL
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) {}
-
-  ajouterFormation(formation: any): Observable<any> {
-    const addFormationUrl = `${this.apiUrl}/ajouter`;
-    return this.http.post(addFormationUrl, formation);
+  getCategories(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(`${this.apiUrl}/showcategories`);
   }
 
-  getCategories(): Observable<any[]> {
-    const getCategoriesUrl = `${this.apiUrl}/affichercategorie`;
-    return this.http.get<any[]>(getCategoriesUrl);
+  addFormation(formationData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/ajouterformation`, formationData);
   }
 }

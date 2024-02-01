@@ -21,7 +21,10 @@ export class PageformationDettaileComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpClient,private router: Router, private authService: AuthService) { }
 
+
   ngOnInit(): void {
+  
+
     this.router.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('currentUser')) {
@@ -58,9 +61,10 @@ export class PageformationDettaileComponent implements OnInit {
       );
 
     });
+  }
 
     
-  }
+  
 
   fetchFormationDetails() {
     // Make an HTTP request to fetch details using this.formationId

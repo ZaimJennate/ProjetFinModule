@@ -1,0 +1,29 @@
+
+<br><br><br>
+<table class="table">
+    <thead class="thead-dark" style="background-color: #cb0c9f ;">
+      <tr>
+       
+        <th scope="col">FormationTitle</th>
+        <th scope="col">NomEntreprise</th>
+        <th scope="col">DateDebut</th>
+        <th scope="col">DateFin</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr *ngFor="let plannedFormation of plannedFormations">
+        <td>{{ plannedFormation.formationTitle }}</td>
+        <td>{{plannedFormation.nomEntreprise}}</td>
+        <td>{{ plannedFormation.dateDebut }}</td>
+        <td>{{ plannedFormation.dateFin }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+
+  
+  
+
+  

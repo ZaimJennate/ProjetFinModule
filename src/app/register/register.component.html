@@ -28,13 +28,25 @@
                                       <label class="form-label" for="form3Example1">First name</label>
                                   </div>
                               </div>
+                              
                               <div class="col-md-6 mb-4">
                                   <div class="form-outline">
                                       <input type="text" id="form3Example2" class="form-control" [(ngModel)]="user.lastname" name="lastname" required>
                                       <label class="form-label" for="form3Example2">Last name</label>
                                   </div>
                               </div>
+
                           </div>
+                          <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                <select id="form3Example1" class="form-select" [(ngModel)]="user.role" name="role" required>
+                                    <option value="USER">USER</option>
+                                    <option value="Formateur">Formateur</option>
+                                </select>
+                                <label class="form-label" for="form3Example1">Role</label>
+                            </div>
+                        </div>
+                        
 
                           <!-- Email input -->
                           <div class="form-outline mb-4">
@@ -47,6 +59,13 @@
                               <input type="password" id="form3Example4" class="form-control" [(ngModel)]="user.password" name="password" required>
                               <label class="form-label" for="form3Example4">Password</label>
                           </div>
+                          <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                              <input type="file" id="form3Example5" class="form-control" name="image" (change)="onFileChange($event)">
+                              <label class="form-label" for="form3Example5">Choose Image</label>
+                            </div>
+                          </div>
+                          
 
                           <!-- Submit button -->
                           <button type="submit" class="btn btn-primary btn-block mb-4">

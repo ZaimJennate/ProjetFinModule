@@ -23,8 +23,8 @@ import { RegisterComponent } from './register/register.component';
 import { PageformationDettaileComponent } from './welcome/pageformation-dettaile/pageformation-dettaile.component';
 import { TablecategorieComponent } from './dashboard/categorie/tablecategorie/tablecategorie.component';
 import { CategorieComponent } from './dashboard/categorie/categorie.component';
-import { PageformateurComponent } from './welcome/pageformateur/pageformateur.component';
-import { PageformateurDetailleComponent } from './welcome/pageformateur-detaille/pageformateur-detaille.component';
+import { AfficheFormationComponent } from './welcome/affiche-formation/affiche-formation.component';
+import { PlannedFormationsComponent } from './welcome/planned-formations/planned-formations.component';
 export const routes: Routes = [
   { path: '', component: WelcomeComponent, 
   children: [
@@ -34,14 +34,15 @@ export const routes: Routes = [
     { path: "formation", component: FormationComponent },
     { path: "formateur", component: FormateurComponent },
     { path: "pageformation", component: PageformationComponent },
-    { path: "formateurdetails/:id", component: PageformateurDetailleComponent },
   
     { path: 'dettailformation/:id', component: PageformationDettaileComponent },
     
+ 
     { path: "login", component: LoginComponent },
-    { path: "pageformateur", component: PageformateurComponent },
   
     { path: "register", component: RegisterComponent },
+    { path: "afficheforma", component: AfficheFormationComponent },
+    { path: "planforma", component: PlannedFormationsComponent },
   ],
 },
 

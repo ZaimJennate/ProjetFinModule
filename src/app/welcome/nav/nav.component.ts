@@ -11,9 +11,7 @@ import { OrganizationService } from 'src/app/organization.service';
 })
 export class NavComponent implements OnInit {
   menuType: string = 'default';
-  userFirstName: string = '';  // Add this variable
-  organizationUrl: string = '';
-  constructor(private organizationService: OrganizationService, private route: Router, private authService: AuthService) { }
+
 
   ngOnInit(): void {
     this.route.events.subscribe((val: any) => {
@@ -24,7 +22,12 @@ export class NavComponent implements OnInit {
           // Fetch user details, including first name
           this.authService.getUserDetails().subscribe(
             (userDetails: any) => {
-              this.userFirstName = userDetails.firstname; // Replace with the actual property in your user details
+              this.userFirstName = userDetails.firstname;
+              this.userRole=userDetails.role;
+              if(this.userRole=='Formateur'){
+                console.warn("outside the Formateur area");
+                this.menuType = "Formateur";
+              }
             },
             (error: any) => {
               console.error('Error fetching user details', error);
@@ -36,7 +39,33 @@ export class NavComponent implements OnInit {
         }
       }
     });
+
+    this.authService.organizationUrl.subscribe(url => {
+      this.organizationUrl = url;
+    });
+    
   }
+
+ // nav.component.ts
+
+onContinue() {
+  // Add the logic to check if the email exists
+  this.authService.checkEmailExists(this.organizationUrl).subscribe(
+    (response: any) => {
+      this.isEmailExists = response.exists;
+      if (this.isEmailExists) {
+        // Handle the case where the email exists
+        console.error('Error: Email already exists');
+      } else {
+        // Continue with your logic when the email doesn't exist
+        console.log('Continue with your logic');
+      }
+    },
+    (error: any) => {
+      console.error('Error checking email existence', error);
+    }
+  );
+}
 
   logout() {
     localStorage.removeItem('currentUser');

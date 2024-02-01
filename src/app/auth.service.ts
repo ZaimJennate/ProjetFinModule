@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { Formation } from './welcome/pageformation/formation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,10 @@ export class AuthService {
   private baseUrl = 'http://localhost:8080'; // Replace with your backend URL
 
   constructor(private http: HttpClient) {}
+  private organizationUrlSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  organizationUrl: Observable<string> = this.organizationUrlSubject.asObservable();
 
-  register(user: any): Observable<any> {
+register(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/registration`, user)
       .pipe(
         catchError((error: HttpErrorResponse) => {
@@ -31,17 +34,64 @@ loginUser(credentials: any): Observable<any> {
   return this.http.post('http://localhost:8080/login', credentials, { headers });
 }
 
+getUserDetails(): Observable<string> {
+  const username = localStorage.getItem('currentUser');
 
-getUserDetails(): Observable<any> {
-    // Assume you have a logged-in user's username stored in localStorage
-    const username = localStorage.getItem('currentUser');
-    if (username) {
-      // Replace 'your-api-endpoint' with the actual API endpoint to fetch user details
-      return this.http.get(`${this.baseUrl}/user/${username}`);
-    } else {
-      // Handle the case where the username is not available
-      return throwError('Username not available');
-    }
+  if (username) {
+    return this.http.get<string>(`${this.baseUrl}/user/${username}`);
+  } else {
+    return throwError('Username not available');
+  }
+}
+getCurrentUserId(): Observable<string> {
+  const username = localStorage.getItem('currentUser');
+
+  if (username) {
+    return this.http.get<{ id: string }>(`${this.baseUrl}/user/${username}`).pipe(
+      map(response => response.id),
+      catchError(error => throwError('Error extracting user ID'))
+    );
+  } else {
+    return throwError('Username not available');
+  }
+}
+
+
+  addToCart(userId: string, formationId: string): Observable<any> {
+    const url = `${this.baseUrl}/add/${userId}/formation/${formationId}`;
+    return this.http.post(url, {});
   }
 
+  getPlannedFormationsForFormateur(formateurId: number): Observable<any[]> {
+    const url = `${this.baseUrl}/formateur/${formateurId}`; // Modify the endpoint based on your API
+
+    return this.http.get<any[]>(url);
+  }
+  // Add this method to your AuthService
+// Add this method to your AuthService
+getFormateurs(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/users/formateurs`); // Adjust the endpoint based on your API
+}
+
+
+
+
+
+
+  getUserCartFormations(userId: number): Observable<Formation[]> {
+    return this.http.get<Formation[]>(`${this.baseUrl}/user/${userId}/cart/formations`);
+  }
+  setOrganizationUrl(url: string): void {
+    this.organizationUrlSubject.next(url);
+  }
+
+  // auth.service.ts
+
+checkEmailExists(email: string): Observable<any> {
+  const url = `${this.baseUrl}/checkEmailExists/${email}`;
+
+  return this.http.get<any>(url);
+}
+
+  
 }

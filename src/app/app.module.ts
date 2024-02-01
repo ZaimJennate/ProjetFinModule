@@ -39,8 +39,13 @@ import { PageformationComponent } from './welcome/pageformation/pageformation.co
 import { PageformationDettaileComponent } from './welcome/pageformation-dettaile/pageformation-dettaile.component';
 import { CategorieComponent } from './dashboard/categorie/categorie.component';
 import { TablecategorieComponent } from './dashboard/categorie/tablecategorie/tablecategorie.component';
+
+import { AfficheFormationComponent } from './welcome/affiche-formation/affiche-formation.component';
+
 import { PageformateurComponent } from './welcome/pageformateur/pageformateur.component';
 import { PageformateurDetailleComponent } from './welcome/pageformateur-detaille/pageformateur-detaille.component';
+import { PlannedFormationsComponent } from './welcome/planned-formations/planned-formations.component';
+
 
 
 @NgModule({
@@ -73,10 +78,15 @@ import { PageformateurDetailleComponent } from './welcome/pageformateur-detaille
      PageformationDettaileComponent,
      CategorieComponent,
      TablecategorieComponent,
+
+     AfficheFormationComponent,
+     
+
      PageformateurComponent,
      PageformateurDetailleComponent,
+     PlannedFormationsComponent,
     
-   
+
     
     ],
   imports: [

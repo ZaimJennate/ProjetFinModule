@@ -1,10 +1,7 @@
 package com.formation.repository;
 
+import com.formation.entities.Categorie;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.formation.entities.Categorie;
-
-
-public interface CategorieRepository extends JpaRepository<Categorie, Long>{
-
+public interface CategorieRepository extends JpaRepository<Categorie, Long> {
 }

@@ -1,31 +1,35 @@
 package com.formation.entities;
 
 import java.math.BigDecimal;
-
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor @NoArgsConstructor @Data
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 public class Formation {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String titre;
     private int nombreHeures;
@@ -33,13 +37,17 @@ public class Formation {
     private String objectifs;
     private String programmeDetaille;
     private String img;
-    
+
   
+    @JsonIgnore
     @OneToMany(mappedBy = "formation")
     private List<PlanifierFormation> planifierformation;
     
-    @ManyToOne(cascade = CascadeType.ALL, optional = true)
-    @JoinColumn(name = "categorie_id")
-    private Categorie categorie;
-
+    
+    @ManyToMany
+    @JoinTable(
+            name = "categorie_formation",
+            joinColumns = @JoinColumn(name = "categorie_id"),
+            inverseJoinColumns = @JoinColumn(name = "formation_id"))
+    private Set<Categorie> categorie = new HashSet<>();
 }

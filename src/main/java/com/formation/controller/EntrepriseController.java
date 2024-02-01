@@ -1,11 +1,15 @@
 package com.formation.controller;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,29 +31,39 @@ public class EntrepriseController {
 
     @PostMapping("/ajouteEntre")
     public ResponseEntity<Entreprise> ajouterEntreprise(@RequestBody Entreprise entreprise) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Entreprise nouvelleEntreprise = entrepriseRepository.save(entreprise);
         return new ResponseEntity<>(nouvelleEntreprise, HttpStatus.CREATED);
     }
 
     @GetMapping("Entre")
     public ResponseEntity<List<Entreprise>> obtenirListeEntreprises() {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<Entreprise> entreprises = entrepriseRepository.findAll();
         return new ResponseEntity<>(entreprises, HttpStatus.OK);
     }
     
     @GetMapping("/compterEntreprise")
     public ResponseEntity<Long> compterFormateurs() {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         long nombreEntreprise = entrepriseRepository.count();
         return new ResponseEntity<>(nombreEntreprise, HttpStatus.OK);
     }
     @DeleteMapping("/supprimerEntreprise/{id}")
     public ResponseEntity<Void> supprimerEntreprise(@PathVariable Long id) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         entrepriseRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
     @PutMapping("/modifierEntreprise/{id}")
     public ResponseEntity<Entreprise> modifierFormateur(@PathVariable Long id, @RequestBody Entreprise entreprise) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
     	Entreprise existingEntreprise = entrepriseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Formateur not found with id: " + id));
 
@@ -66,6 +80,8 @@ public class EntrepriseController {
     
     @GetMapping("/getEntrepriseById/{id}")
     public ResponseEntity<Entreprise> getEntrepriseById(@PathVariable Long id) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Optional<Entreprise> entrepriseOptional = entrepriseRepository.findById(id);
         
         if (entrepriseOptional.isPresent()) {

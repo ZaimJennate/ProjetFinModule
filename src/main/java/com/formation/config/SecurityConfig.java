@@ -3,6 +3,7 @@ package com.formation.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,14 +29,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
-                .authorizeRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/admin-page").hasAuthority("ADMIN")
-                        .requestMatchers("/user-page").hasAuthority("USER")
-               
+        .authorizeRequests(authorizeRequests -> authorizeRequests
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .requestMatchers("/login","/registration", "/css/**","/users/formateurs","/checkEmailExists/{email}","/user/{username}","/api/upload","/ajouterformation","/afficherFormations","/ajouterForma","/modifierFormation/{id}","/getFormationById/{id}","/supprimerFormations/{id}","/showForma","/compterFormateurs","/supprimerForma/{id}","/modifierForma/{id}","/api/sessions-formations","/getFormateurById/{id}","/ajouteEntre","Entre","/compterEntreprise","/getEntrepriseById/{id}","/supprimerEntreprise/{id}","/modifierEntreprise/{id}","/compterFormations","/categorie","/supprimercategorie/{id}","/modifierCategorie/{id}","/ajoutercategorie","/affichercategorie","/toutes","/add","/addFormation/{userId}","/user/{userId}/formations","/addcategories","/showcategories","/add/{userId}/formation/{formationId}","/user/{userId}/cart/formations","/api/sessions-formations/show","/formateur/{formateurId}","/api/sessions-formations/show3").permitAll()
+            .anyRequest().authenticated());
 
-                        .requestMatchers("/login","/registration", "/css/**","/user/{username}", "/ajouter","/afficherFormations","/ajouterForma","/modifierFormation/{id}","/getFormationById/{id}","/supprimerFormations/{id}","/showForma","/compterFormateurs","/supprimerForma/{id}","/modifierForma/{id}","/api/sessions-formations","/getFormateurById/{id}","/ajouteEntre","Entre","/compterEntreprise","/getEntrepriseById/{id}","/supprimerEntreprise/{id}","/modifierEntreprise/{id}","/compterFormations","/categorie","/supprimercategorie/{id}","/modifierCategorie/{id}","/ajoutercategorie","/affichercategorie","/toutes").permitAll()
-                        .anyRequest().authenticated())
-                ;
+        
+                
 
         return http.build();
     }

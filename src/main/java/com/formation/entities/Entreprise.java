@@ -2,6 +2,8 @@ package com.formation.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -26,8 +28,9 @@ public class Entreprise {
     private String url;
     private String email;
     
-
+    @JsonIgnore
     @OneToMany(mappedBy = "entreprise")
+   
     private List<PlanifierFormation> planifierformation;
 }
 

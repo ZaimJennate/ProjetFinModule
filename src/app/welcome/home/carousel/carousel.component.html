@@ -10,14 +10,12 @@
       ></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item" *ngFor="let student of formations; let i = index" [class.active]="i === 0">
+      <div class="carousel-item" *ngFor="let student of formations.slice(0,3); let i = index" [class.active]="i === 0">
         <!-- Your existing slide content goes here -->
         <img id="img" src="{{ student.img }}" class="d-block w-100" alt="Slide {{ i + 1 }}">
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>{{ student.titre }}</h1>
-            <p>{{ student.programmeDetaille }}</p>
-            <p><a class="btn btn-lg btn-primary" routerLink="/pageformation" href="#">Sign up today</a></p>
+            <p><a class="btn btn-lg btn-primary" [routerLink]="['/dettailformation', student.id]" href="#">Sign up today</a></p>
           </div>
         </div>
       </div>

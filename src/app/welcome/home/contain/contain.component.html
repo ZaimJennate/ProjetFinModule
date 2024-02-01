@@ -1,6 +1,6 @@
 <br>
 <div class="container marketing">
-  <h1 class="text-center">Our Formateurs</h1>
+  <h1 class="text-center">Our Instructors</h1>
   <!-- Three columns of text below the carousel -->
   <div class="row">
     <div class="col-lg-4 text-center" *ngFor="let student of formateurs.slice(0,3)">
@@ -10,7 +10,7 @@
       <h2  class="text-center">{{ student.nom }}</h2>
       <p>{{ student.competences }}</p>
       <p>{{ student.remarques }}</p>
-      <p><a routerLink="/formateur" class="btn btn-secondary" href="#">View details &raquo;</a></p>
+      <p><a [routerLink]="['/formateurdetails', student.id]" class="btn btn-primary" href="#">View details &raquo;</a></p>
     </div><!-- /.col-lg-4 -->
   </div>
 </div>

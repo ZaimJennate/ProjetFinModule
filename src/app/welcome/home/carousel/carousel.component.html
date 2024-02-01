@@ -10,7 +10,7 @@
       ></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item" *ngFor="let student of formations; let i = index" [class.active]="i === 0">
+      <div class="carousel-item" *ngFor="let student of formations.slice(0,3); let i = index" [class.active]="i === 0">
         <!-- Your existing slide content goes here -->
         <img id="img" src="{{ student.img }}" class="d-block w-100" alt="Slide {{ i + 1 }}">
         <div class="container">

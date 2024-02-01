@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, of, throwError } from 'rxjs';
+import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,17 +31,46 @@ loginUser(credentials: any): Observable<any> {
   return this.http.post('http://localhost:8080/login', credentials, { headers });
 }
 
+getUserDetails(): Observable<string> {
+  const username = localStorage.getItem('currentUser');
 
-getUserDetails(): Observable<any> {
-    // Assume you have a logged-in user's username stored in localStorage
-    const username = localStorage.getItem('currentUser');
-    if (username) {
-      // Replace 'your-api-endpoint' with the actual API endpoint to fetch user details
-      return this.http.get(`${this.baseUrl}/user/${username}`);
-    } else {
-      // Handle the case where the username is not available
-      return throwError('Username not available');
-    }
+  if (username) {
+    return this.http.get<string>(`${this.baseUrl}/user/${username}`);
+  } else {
+    return throwError('Username not available');
+  }
+}
+getCurrentUserId(): Observable<string> {
+  const username = localStorage.getItem('currentUser');
+
+  if (username) {
+    return this.http.get<{ id: string }>(`${this.baseUrl}/user/${username}`).pipe(
+      map(response => response.id),
+      catchError(error => throwError('Error extracting user ID'))
+    );
+  } else {
+    return throwError('Username not available');
+  }
+}
+
+
+  addToCart(userId: string, formationId: string): Observable<any> {
+    const url = `${this.baseUrl}/add/${userId}/formation/${formationId}`;
+    return this.http.post(url, {});
   }
 
+
+  getUserCart(): Observable<any> {
+    const userId = localStorage.getItem('currentUser');
+  
+    if (userId) {
+      return this.http.get(`${this.baseUrl}/user/${userId}/cart`).pipe(
+        tap(data => console.log('User Cart Data:', data)),
+        catchError(error => throwError(error))
+      );
+    } else {
+      throw new Error('User ID not available');
+    }
+  }
+  
 }

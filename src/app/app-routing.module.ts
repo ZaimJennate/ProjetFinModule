@@ -23,6 +23,7 @@ import { RegisterComponent } from './register/register.component';
 import { PageformationDettaileComponent } from './welcome/pageformation-dettaile/pageformation-dettaile.component';
 import { TablecategorieComponent } from './dashboard/categorie/tablecategorie/tablecategorie.component';
 import { CategorieComponent } from './dashboard/categorie/categorie.component';
+import { AfficheFormationComponent } from './welcome/affiche-formation/affiche-formation.component';
 export const routes: Routes = [
   { path: '', component: WelcomeComponent, 
   children: [
@@ -39,6 +40,7 @@ export const routes: Routes = [
     { path: "login", component: LoginComponent },
   
     { path: "register", component: RegisterComponent },
+    { path: "afficheforma", component: AfficheFormationComponent },
   ],
 },
 

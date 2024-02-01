@@ -19,7 +19,7 @@ export class TablecategorieComponent {
   }
 
   fetchCategorie() {
-    this.http.get('http://localhost:8080/categorie')
+    this.http.get('http://localhost:8080/showcategories')
       .subscribe((data: any) => {
         this.categories = data;
       });
@@ -43,9 +43,9 @@ editCategorie(id: number) {
 }
 
 addCategorie(newCategory: string) {
-  const categoryData = { nomCategorie: this.newCategory };
+  const categoryData = { nom: this.newCategory };
 
-  this.http.post('http://localhost:8080/ajoutercategorie', categoryData)
+  this.http.post('http://localhost:8080/addcategories', categoryData)
     .subscribe(() => {
       console.log('Category added successfully');
       // Refresh the window after addition
